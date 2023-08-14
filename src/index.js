@@ -1,4 +1,7 @@
 import './reset.css';
 import './style.css';
+import Gameboard from './gameboard/gameboard';
 
-console.log('works');
+const gameboard = new Gameboard();
+
+console.log(gameboard);

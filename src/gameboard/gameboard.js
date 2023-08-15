@@ -1,5 +1,3 @@
-import Knight from './knight/knight';
-
 const getLegalMoves = function getLegalMoves(startPos) {
   const rawMoves = [
     [startPos[0] + 1, startPos[1] - 2],
@@ -20,23 +18,46 @@ const getLegalMoves = function getLegalMoves(startPos) {
   return legalMoves;
 };
 
-class Gameboard {
-  constructor() {
-    this.knight = new Knight();
+const getWinningSequence = function getWinningSequence(links, startPos, winningPos) {
+  const winningSequence = [winningPos];
+
+  for (let i = 0; i < links.length; i += 1) {
+    if (links[i][1].toString() === winningSequence[winningSequence.length - 1].toString()) {
+      winningSequence.push(links[i][0]);
+      if (links[i][0].toString() !== startPos) i = 0;
+    }
   }
 
-  // [3,4] and [7,1]
-  knightMoves(startPos, endPos) {
-    // const queue = [];
-    // const seen = [];
+  winningSequence.push(startPos);
+  return winningSequence.reverse();
+};
 
-    // while (queue.length !== 0) {
-    //   // Get all possible first moves from start
+const knightMoves = function knightMoves(startPos, endPos) {
+  let winningSequence;
+  let queue = [startPos];
+  const links = [];
+  const seen = [];
 
-    //   seen.push([queue.shift()]);
-    // }
-    console.log(getLegalMoves(startPos));
+  while (queue.length !== 0) {
+    const legalMoves = getLegalMoves(queue[0]);
+
+    for (let i = 0; i < legalMoves.length; i += 1) {
+      if (!seen.includes(legalMoves[i].toString())) {
+        links.push([queue[0], legalMoves[i]]);
+        seen.push(legalMoves[i].toString());
+
+        if (legalMoves[i].toString() === endPos.toString()) {
+          winningSequence = getWinningSequence(links, startPos, endPos);
+          queue = [];
+          break;
+        } else queue.push(legalMoves[i]);
+      }
+    }
+
+    queue.shift();
   }
-}
 
-export default Gameboard;
+  console.log(winningSequence);
+};
+
+export default knightMoves;

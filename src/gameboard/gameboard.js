@@ -34,7 +34,7 @@ const getWinningSequence = function getWinningSequence(links, startPos, winningP
   return winningSequence.reverse();
 };
 
-const knightMoves = function knightMoves(startPos, endPos) {
+const getKnightMoves = function getKnightMoves(startPos, endPos) {
   let winningSequence = [];
   let queue = [startPos];
   const links = []; // an array of [parent, child] arrays to trace back endpos to startpos
@@ -62,4 +62,4 @@ const knightMoves = function knightMoves(startPos, endPos) {
   return winningSequence;
 };
 
-export default knightMoves;
+export default getKnightMoves;

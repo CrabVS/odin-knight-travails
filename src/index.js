@@ -1,5 +1,5 @@
 import './reset.css';
 import './style.css';
-import knightMoves from './gameboard/gameboard';
+import getKnightMoves from './gameboard/gameboard';
 
-console.log(knightMoves([3, 4], [7, 1]));
+console.log(getKnightMoves([3, 4], [7, 1]));

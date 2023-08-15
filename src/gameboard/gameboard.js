@@ -11,6 +11,7 @@ const getLegalMoves = function getLegalMoves(startPos) {
   ];
 
   const legalMoves = [];
+  // Determines legal and illegal moves.
   rawMoves.forEach((move) => {
     if ((move[0] >= 0 && move[0] <= 7) && (move[1] >= 0 && move[1] <= 7)) legalMoves.push(move);
   });
@@ -21,6 +22,7 @@ const getLegalMoves = function getLegalMoves(startPos) {
 const getWinningSequence = function getWinningSequence(links, startPos, winningPos) {
   const winningSequence = [winningPos];
 
+  // Loops through the links array until it cant find a connection
   for (let i = 0; i < links.length; i += 1) {
     if (links[i][1].toString() === winningSequence[winningSequence.length - 1].toString()) {
       winningSequence.push(links[i][0]);
@@ -33,9 +35,9 @@ const getWinningSequence = function getWinningSequence(links, startPos, winningP
 };
 
 const knightMoves = function knightMoves(startPos, endPos) {
-  let winningSequence;
+  let winningSequence = [];
   let queue = [startPos];
-  const links = [];
+  const links = []; // an array of [parent, child] arrays to trace back endpos to startpos
   const seen = [];
 
   while (queue.length !== 0) {
@@ -57,7 +59,7 @@ const knightMoves = function knightMoves(startPos, endPos) {
     queue.shift();
   }
 
-  console.log(winningSequence);
+  return winningSequence;
 };
 
 export default knightMoves;

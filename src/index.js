@@ -4,4 +4,4 @@ import Gameboard from './gameboard/gameboard';
 
 const gameboard = new Gameboard();
 
-console.log(gameboard);
+gameboard.knightMoves([3, 4], [7, 1]);
